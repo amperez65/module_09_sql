@@ -1,0 +1,110 @@
+
+
+-- query 1
+select
+	e.emp_no,
+	e.last_name,
+	e.first_name,
+	e.sex,
+	s.salary
+from
+	employees e
+	join salaries s on s.emp_no = e.emp_no
+
+-- query 2
+select
+	first_name,
+	last_name,
+	hire_date
+from
+	employees
+where
+	extract(year from hire_date) = 1986
+order by
+	hire_date asc;
+	
+-- query 3
+select
+	e.first_name,
+	e.last_name,
+	dm.dept_no,
+	d.dept_name,
+	e.emp_no,
+	t.title
+from
+	employees e
+	join dept_manager dm on dm.emp_no = e.emp_no
+	join departments d on dm.dept_no = d.dept_no
+	join titles t on t.title_id = e.emp_title_id
+
+
+
+-- query 4
+select
+	de.dept_no,
+	e.emp_no,
+	e.last_name,
+	e.first_name,
+	d.dept_name
+from
+	employees e
+	join dept_emp de on e.emp_no = de.emp_no
+	join departments d on de.dept_no = d.dept_no
+	
+
+-- query 5
+select
+	e.last_name,
+	e.first_name,
+	e.sex
+from
+	employees e
+where
+	first_name = 'Hercules'
+	and last_name like 'B%'
+
+
+
+-- query 6
+select
+	e.emp_no,
+	e.last_name,
+	e.first_name,
+	d.dept_name
+from
+	employees e
+	join dept_emp de on e.emp_no = de.emp_no
+	join departments d on de.dept_no = d.dept_no
+where
+	dept_name = 'Sales'
+	
+	
+	
+-- query 7
+select
+	e.emp_no,
+	e.last_name,
+	e.first_name,
+	d.dept_name
+from
+	employees e
+	join dept_emp de on e.emp_no = de.emp_no
+	join departments d on de.dept_no = d.dept_no
+where
+	dept_name = 'Sales' 
+	or dept_name = 'Development'
+
+
+
+-- query 8
+select
+	last_name,
+	count(last_name) as num_last_names
+from
+	employees
+group by
+	last_name
+order by
+	num_last_names desc;
+
+
